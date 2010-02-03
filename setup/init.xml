@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/generic/persistentdocument/import/generic_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="markergas">
+		<dynamiclist listid="modules_markergas/availablesites"
+			description="Liste des sites disponibles"
+			label="Liste des sites disponibles pour les statistiques">	
+		</dynamiclist>
+		<dynamiclist listid="modules_markergas/reports"
+			description="Liste des rapports disponibles"
+			label="Liste des rapports disponibles pour les statistiques">	
+		</dynamiclist>	
+	</systemfolder>
+</script>

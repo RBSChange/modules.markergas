@@ -1,0 +1,23 @@
+div.modules_markergas_DashboardGoogleAnalytics strong{
+	font-weight: bold;
+}
+div.modules_markergas_DashboardGoogleAnalytics table tbody tr.odd{
+	background-color: whitesmoke;
+}
+div.modules_markergas_DashboardGoogleAnalytics table tbody tr:hover{
+	background-color: #ddd;
+}
+div.modules_markergas_DashboardGoogleAnalytics table{
+	width: 100%;
+}
+div.modules_markergas_DashboardGoogleAnalytics table th{
+	font-weight: bold;
+}
+div.modules_markergas_DashboardGoogleAnalytics table td{
+	padding: 2px 5px;
+}
+div.modules_markergas_DashboardGoogleAnalytics .report-download{
+	font-weight: bold;
+	text-align: right;
+	margin-top: 5px;
+}

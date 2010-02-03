@@ -1,0 +1,4 @@
+#edt_website_marker cfield[fieldtype="markergasproperties"]
+{
+	-moz-binding: url(binding:modules.markergas.cMarkergasEditor#cMarkergasPropertiesField);
+}

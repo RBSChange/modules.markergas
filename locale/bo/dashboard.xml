@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="report-block">
+		<locale lang="fr">rapport Google Analytics</locale>
+		<locale lang="en">Google Analytics report</locale>
+	</entity>
+	<entity id="pdf-download">
+		<locale lang="fr">télécharger le rapport en PDF</locale>
+		<locale lang="en">download PDF report</locale>
+	</entity>
+	<entity id="dashboard-google-analytics-block-subtitle">
+		<locale lang="fr"><strong>{report}</strong>	pour <strong>{websites}</strong></locale>
+		<locale lang="en"><strong>{report}</strong>	for <strong>{websites}</strong></locale>
+	</entity>
+
+	<entity id="error-invalid-marker">
+		<locale lang="fr">le marqueur n'est pas correctement configuré.</locale>
+		<locale lang="en">the marquer is invalid.</locale>
+	</entity>
+	<entity id="error-invalid-report">
+		<locale lang="fr">le rapport "{report}" n'est pas valide.</locale>
+		<locale lang="en">"{report}" report is not valid.</locale>
+	</entity>
+	<entity id="error-getting-data">
+		<locale lang="fr">une erreur s'est produite lors de la récupération des données depuis Google Analytics.</locale>
+		<locale lang="en">an error occured while retrieving data from Google Analytics.</locale>
+	</entity>
+</localization>

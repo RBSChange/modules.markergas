@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rights>
+	<actions>
+		<document name="rootfolder" />
+	</actions>
+
+	<roles>	
+		<role name="Admin">
+			<permission name="*" />
+			<permission name="LoadPermissions.*" />
+			<permission name="SavePermissions.*" />
+		</role>
+		
+		<role name="User">
+			<permission name="List.*" />
+		</role>
+	</roles>
+</rights>

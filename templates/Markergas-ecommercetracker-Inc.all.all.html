@@ -1,0 +1,23 @@
+<script type="text/javascript">
+	pageTracker._addTrans(
+		"${order/getOrderNumber}",
+		"",
+		"${order/getLinesAmountWithTax}",
+		"${php: order.getLinesAmountWithTax() - order.getLinesAmountWithoutTax()}",
+		"${order/getShippingFeesWithTax}",
+		"${order/getBillingAddress/getCity}",
+		"${order/getBillingAddress/getProvince}",
+		"${order/getBillingAddress/getCountry/getLabel}"
+	);
+	<p tal:omit-tag="" tal:repeat="item products">
+	pageTracker._addItem(
+		"${order/getOrderNumber}",
+		"${item/ref}",
+		"${item/productName}",
+		"${item/category}",
+		"${item/price}",
+		"${item/quantity}"
+	);
+	</p>
+	pageTracker._trackTrans();
+</script>

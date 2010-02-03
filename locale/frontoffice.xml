@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<localization>
+	<entity id="MediaDownloadPath">
+		<locale lang="fr">/téléchargements</locale>
+		<locale lang="en">/downloads</locale>
+	</entity>
+</localization>

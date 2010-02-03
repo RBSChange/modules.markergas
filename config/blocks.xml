@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<blocks>
+	<block type="modules_markergas_DashboardGoogleAnalytics" icon="statistics" dashboard="true" label="&amp;modules.markergas.bo.dashboard.Report-block;">
+		<parameters>
+			<parameter name="report" type="String" min-occurs="1" default-value="VisitsReport" list-id="modules_markergas/reports" />
+			<parameter name="markerid" type="String" min-occurs="1" list-id="modules_markergas/availablesites" />
+		</parameters>
+	</block>
+	<block type="modules_markergas_ecommercetracking" icon="markers" label="&amp;modules.markergas.bo.general.block.Tracking;"/>
+</blocks>

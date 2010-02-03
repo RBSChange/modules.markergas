@@ -1,0 +1,16 @@
+<h2 change:translate="&modules.markergas.bo.dashboard.Dashboard-google-analytics-block-subtitle; ; report widget/reportName ; websites websitesLabel" />
+<table>
+	<thead tal:condition="widget/columns">
+		<tr>
+			<th tal:repeat="column widget/columns" tal:content="column/Name" />
+		</tr>
+	</thead>
+	<tbody>
+		<tr tal:repeat="line widget/lines" tal:attributes="class php: repeat.line.odd ? 'odd' : 'even'">
+			<td tal:repeat="cell line" tal:content="cell/Value" />
+		</tr>
+	</tbody>
+</table>
+<p class="report-download">
+	<a change:link="module markergas ; action GetGoogleAnalyticsInfo ; report report ; format '0' ; markerId markerId" target="_blank" change:translate="&modules.markergas.bo.dashboard.Pdf-download;" />
+</p>
