@@ -9,6 +9,7 @@
 			<permission name="*" />
 			<permission name="LoadPermissions.*" />
 			<permission name="SavePermissions.*" />
+			<permission name="EditLocale"/>
 		</role>
 		
 		<role name="User">
