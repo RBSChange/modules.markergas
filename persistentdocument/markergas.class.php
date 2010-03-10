@@ -58,7 +58,7 @@ class markergas_persistentdocument_markergas extends markergas_persistentdocumen
 		$this->setGaSiteId(isset($value['gaSiteId']) ? $value['gaSiteId'] : null);
 		$this->setUseEcommerce(isset($value['useEcommerce']) && $value['useEcommerce'] == 'true');
 		$this->removeAllBillingmodes();
-		if (isset($value['billingmodes']))
+		if (isset($value['billingmodes']) && f_util_StringUtils::isNotEmpty($value['billingmodes']))
 		{
 			foreach (explode(',', $value['billingmodes']) as $id)
 			{
