@@ -23,6 +23,7 @@ class markergas_patch_0300 extends patch_BasePatch
 	{
 		f_permission_PermissionService::getInstance()->addImportInRight('website', 'markergas', 'websiterights');
 		exec("change.php compile-roles");
+		exec("change.php compile-permissions");
 	}
 
 	/**
