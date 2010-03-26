@@ -244,7 +244,7 @@
 				</xul:columns>
 				<xul:rows>
 					<xul:row><xul:clabel control="markergas_markergas_login" value="&amp;modules.markergas.document.markergas.Login;" /><xul:cfield anonid="mLogin" id="markergas_markergas_login" name="mLogin" fieldtype="text" hidehelp="true" /></xul:row>
-					<xul:row><xul:clabel control="markergas_markergas_password" value="&amp;modules.markergas.document.markergas.Password;" /><xul:cfield anonid="mPassword" id="markergas_markergas_password" name="mPassword" fieldtype="text" hidehelp="true" /></xul:row>
+					<xul:row><xul:clabel control="markergas_markergas_password" value="&amp;modules.markergas.document.markergas.Password;" /><xul:cfield anonid="mPassword" id="markergas_markergas_password" name="mPassword" fieldtype="password" hidehelp="true" /></xul:row>
 					<xul:row><xul:clabel control="markergas_markergas_gaSiteId" value="&amp;modules.markergas.document.markergas.Gasiteid;" /><xul:cfield anonid="mGaSiteId" id="markergas_markergas_gaSiteId" name="mGaSiteId" fieldtype="text" hidehelp="true" /></xul:row>
 					<xul:row anonid="mUseEcommerceRow"><xul:clabel control="markergas_markergas_useEcommerce" value="&amp;modules.markergas.document.markergas.Useecommerce;" /><xul:cfield anonid="mUseEcommerce" id="markergas_markergas_useEcommerce" name="mUseEcommerce" fieldtype="boolean" hidehelp="true" /></xul:row>
 					<xul:row anonid="mBillingmodesRow"><xul:clabel control="markergas_markergas_billingmodes" value="&amp;modules.markergas.document.markergas.Billingmodes;" /><xul:cfield anonid="mBillingmodes" id="markergas_markergas_billingmodes" name="mBillingmodes" fieldtype="documentarray" moduleselector="payment" allow="{PAYMENT_MODELS}" hidehelp="true" /></xul:row>
