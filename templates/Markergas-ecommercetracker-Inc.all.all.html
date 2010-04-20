@@ -1,7 +1,7 @@
 <script type="text/javascript">
 	pageTracker._addTrans(
 		"${order/getOrderNumber}",
-		"",
+		"${order/getShop/getLabel}",
 		"${order/getLinesAmountWithTax}",
 		"${php: order.getLinesAmountWithTax() - order.getLinesAmountWithoutTax()}",
 		"${order/getShippingFeesWithTax}",

@@ -116,7 +116,7 @@ class markergas_MarkergasService extends website_MarkerService
 		{
 			$product = array();
 			$product['ref'] = $line->getCodeReference();
-			$product['price'] = $line->getAmountWithTax();
+			$product['price'] = $line->getUnitPriceWithTax();
 			$product['quantity'] = $line->getQuantity();
 			$product['productName'] = $this->getProductName($line, $marker);
 			$product['category'] = $this->getCategory($line, $order, $marker);
