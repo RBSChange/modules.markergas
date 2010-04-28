@@ -3,4 +3,12 @@
 	<actions>
 		<document name="markergas" />
 	</actions>
+	<roles>
+		<role name="TreeManager">
+			<permission name="Insert.markergas" />
+			<permission name="Update.markergas" />
+			<permission name="Load.markergas" />
+			<permission name="Delete.markergas" />
+		</role>
+	</roles>
 </rights>
