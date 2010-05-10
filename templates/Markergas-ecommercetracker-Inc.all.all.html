@@ -2,14 +2,15 @@
 	pageTracker._addTrans(
 		"${order/getOrderNumber}",
 		"${order/getShop/getLabel}",
-		"${order/getLinesAmountWithTax}",
+		<tal:block tal:condition="includeTaxes"> "${order/getLinesAmountWithTax}",</tal:block>
+		<tal:block tal:condition="not: includeTaxes"> "${order/getLinesAmountWithoutTax}",</tal:block>
 		"${php: order.getLinesAmountWithTax() - order.getLinesAmountWithoutTax()}",
 		"${order/getShippingFeesWithTax}",
 		"${order/getBillingAddress/getCity}",
 		"${order/getBillingAddress/getProvince}",
 		"${order/getBillingAddress/getCountry/getLabel}"
 	);
-	<p tal:omit-tag="" tal:repeat="item products">
+	<tal:block tal:repeat="item products">
 	pageTracker._addItem(
 		"${order/getOrderNumber}",
 		"${item/ref}",
@@ -18,6 +19,6 @@
 		"${item/price}",
 		"${item/quantity}"
 	);
-	</p>
+	</tal:block>
 	pageTracker._trackTrans();
 </script>

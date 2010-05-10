@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localization>
+	<entity id="trackonlypaidorders">
+		<locale lang="fr">ne suivre que les commandes payées</locale>
+		<locale lang="en">report</locale>
+	</entity>
+	<entity id="trackonlypaidorders-help">
+		<locale lang="fr">lorsque cette option vaut "non", les transactions non payées seront comptabilisée par Google Analytics</locale>
+		<locale lang="en">when set to "no", all transactions will be tracked by Google Analytics</locale>
+	</entity>
+	<entity id="includetaxes">
+		<locale lang="fr">inclure les taxes</locale>
+		<locale lang="en">include taxes</locale>
+	</entity>
+	<entity id="includetaxes-help">
+		<locale lang="fr">inclure les taxes dans les prix</locale>
+		<locale lang="en">include taxes in prices</locale>
+	</entity>
+</localization>

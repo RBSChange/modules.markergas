@@ -90,16 +90,18 @@ class markergas_MarkergasService extends website_MarkerService
 	/**
 	 * @param order_persistentdocument_order $order
 	 * @param markergas_persistentdocument_markergas $marker
+	 * @param Boolean $includeTaxes
 	 * @return String
 	 */
-	public function getEcommercePlainMarker($order, $marker)
+	public function getEcommercePlainMarker($order, $marker, $includeTaxes = true)
 	{
 		$template = TemplateLoader::getInstance()
 			->setMimeContentType(K::HTML)
 			->setPackageName('modules_markergas')
 			->load('Markergas-ecommercetracker-Inc');
 		$template->setAttribute('order', $order);
-		$template->setAttribute('products', $this->getProducts($order, $marker));
+		$template->setAttribute('includeTaxes', $includeTaxes);
+		$template->setAttribute('products', $this->getProducts($order, $marker, $includeTaxes));
 		$html = $template->execute();
 		return $html;
 	}
@@ -109,14 +111,14 @@ class markergas_MarkergasService extends website_MarkerService
 	 * @param markergas_persistentdocument_markergas $marker
 	 * @return Array
 	 */
-	private function getProducts($order, $marker)
+	private function getProducts($order, $marker, $includeTaxes)
 	{
 		$products = array();
 		foreach ($order->getLineArray() as $line)
 		{
 			$product = array();
 			$product['ref'] = $line->getCodeReference();
-			$product['price'] = $line->getUnitPriceWithTax();
+			$product['price'] =  $includeTaxes ? $line->getUnitPriceWithTax() : $line->getUnitPriceWithoutTax();
 			$product['quantity'] = $line->getQuantity();
 			$product['productName'] = $this->getProductName($line, $marker);
 			$product['category'] = $this->getCategory($line, $order, $marker);

@@ -10,11 +10,16 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 	 */
 	function execute($request, $response)
 	{
+		if ($this->isInBackoffice())
+		{
+			return website_BlockView::NONE;
+		}
 		$cartInfo = order_CartService::getInstance()->getDocumentInstanceFromSession();
 		if ($cartInfo !== null)
 		{
 			$order = $cartInfo->getOrder();
-			if ($order instanceof order_persistentdocument_order && ($order->getPaymentStatus() == 'PAYMENT_SUCCESS' || $order->getPaymentStatus() == 'PAYMENT_DELAYED'))
+			$isStatusTracked = $this->getConfiguration()->getTrackonlypaidorders() ? ($order->getPaymentStatus() == 'PAYMENT_SUCCESS' || $order->getPaymentStatus() == 'PAYMENT_DELAYED') : true;
+			if ($order instanceof order_persistentdocument_order && $isStatusTracked)
 			{
 				$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
 				$lang = RequestContext::getInstance()->getLang();
@@ -23,7 +28,7 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 				{
 					if ($marker instanceof markergas_persistentdocument_markergas && $marker->getUseEcommerce() && in_array($order->getBillingModeId(), DocumentHelper::getIdArrayFromDocumentArray($marker->getBillingmodesArray())))
 					{
-						$html = markergas_MarkergasService::getInstance()->getEcommercePlainMarker($order, $marker);
+						$html = markergas_MarkergasService::getInstance()->getEcommercePlainMarker($order, $marker, $this->getConfiguration()->getIncludetaxes());
 						$this->getContext()->appendToPlainMarker($html);
 						break;
 					}
