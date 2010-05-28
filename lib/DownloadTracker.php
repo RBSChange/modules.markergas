@@ -21,6 +21,6 @@ class markergas_DownloadTracker implements f_DownloadAttributeBuilder
 	function getAttributes($media, $class)
 	{
 		$path = f_Locale::translate('&modules.markergas.frontoffice.MediaDownloadPath;')."/".$media->getDocumentService()->getPathOf($media)."/".$media->getLabel();
-		return array("onclick" => "javascript: pageTracker._trackPageview ('".str_replace("'", "\\'", $path)."');");
+		return array("class" => "link download", "onclick" => "javascript: pageTracker._trackPageview ('".str_replace("'", "\\'", $path)."');");
 	}
 }
