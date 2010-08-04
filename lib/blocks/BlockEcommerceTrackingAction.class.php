@@ -18,19 +18,23 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 		if ($cartInfo !== null)
 		{
 			$order = $cartInfo->getOrder();
-			$isStatusTracked = $this->getConfiguration()->getTrackonlypaidorders() ? ($order->getPaymentStatus() == 'PAYMENT_SUCCESS' || $order->getPaymentStatus() == 'PAYMENT_DELAYED') : true;
-			if ($order instanceof order_persistentdocument_order && $isStatusTracked)
-			{
-				$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
-				$lang = RequestContext::getInstance()->getLang();
-				$markers = website_MarkerService::getInstance()->getByWebsiteAndLang($website, $lang);
-				foreach ($markers as $marker)
+			if ($order instanceof order_persistentdocument_order)
+			{	
+				$bills = order_BillService::getInstance()->getByOrder($order);
+				$bill = count($bills) == 0 ? null : f_util_ArrayUtils::firstElement($bills);
+				if ($this->getConfiguration()->getTrackonlypaidorders() ? ($bill && $bill->getStatus() !== order_BillService::FAILED) : true)
 				{
-					if ($marker instanceof markergas_persistentdocument_markergas && $marker->getUseEcommerce() && in_array($order->getBillingModeId(), DocumentHelper::getIdArrayFromDocumentArray($marker->getBillingmodesArray())))
+					$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+					$lang = RequestContext::getInstance()->getLang();
+					$markers = website_MarkerService::getInstance()->getByWebsiteAndLang($website, $lang);
+					foreach ( $markers as $marker )
 					{
-						$html = markergas_MarkergasService::getInstance()->getEcommercePlainMarker($order, $marker, $this->getConfiguration()->getIncludetaxes());
-						$this->getContext()->appendToPlainMarker($html);
-						break;
+						if ($marker instanceof markergas_persistentdocument_markergas && $marker->getUseEcommerce() && in_array($order->getBillingModeId(), DocumentHelper::getIdArrayFromDocumentArray($marker->getBillingmodesArray())))
+						{
+							$html = markergas_MarkergasService::getInstance()->getEcommercePlainMarker($order, $marker, $this->getConfiguration()->getIncludetaxes());
+							$this->getContext()->appendToPlainMarker($html);
+							break;
+						}
 					}
 				}
 			}
