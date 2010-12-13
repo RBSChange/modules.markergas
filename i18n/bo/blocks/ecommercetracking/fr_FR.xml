@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.markergas.bo.blocks.ecommercetracking" lcid="fr_FR">
+  <key id="trackonlypaidorders">ne suivre que les commandes payées</key>
+  <key id="trackonlypaidorders-help">lorsque cette option vaut ″non″, les transactions non payées seront comptabilisée par Google Analytics</key>
+  <key id="includetaxes">inclure les taxes</key>
+  <key id="includetaxes-help">inclure les taxes dans les prix</key>
+</i18n>

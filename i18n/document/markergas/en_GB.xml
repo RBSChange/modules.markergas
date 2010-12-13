@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.markergas.document.markergas" lcid="en_GB">
+  <key id="label">label</key>
+  <key id="label-help">label</key>
+  <key id="login">e-mail address</key>
+  <key id="login-help">the e-mail address of the Google Analytics account</key>
+  <key id="password">password</key>
+  <key id="password-help">the password of the Google Analytics account</key>
+  <key id="gasiteid">site id</key>
+  <key id="gasiteid-help">this id can be found in the URL of the ″modify″ link that enables to parameter a site profile. For example, in the URL ″https://www.google.com/analytics/settings/profile_summary?id=123456″, the id is ″123456″</key>
+  <key id="useecommerce">use e-commerce tracking?</key>
+  <key id="useecommerce-help">use e-commerce tracking?</key>
+  <key id="productname">google data 'productName'</key>
+  <key id="productname-help">google data 'productName'</key>
+  <key id="category">google data 'category'</key>
+  <key id="category-help">google data 'category'</key>
+  <key id="billingmodes">only activated with following billingmodes</key>
+  <key id="billingmodes-help">only activated with following billingmodes</key>
+  <key id="account">account</key>
+  <key id="account-help">account-help</key>
+</i18n>
