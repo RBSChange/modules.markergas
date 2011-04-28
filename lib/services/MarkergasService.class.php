@@ -34,6 +34,80 @@ class markergas_MarkergasService extends website_MarkerService
 	{
 		return $this->pp->createQuery('modules_markergas/markergas');
 	}
+	
+	/**
+	 * @param markergas_persistentdocument_markergas $document
+	 * @param string $actionType
+	 * @param array $formProperties
+	 */
+	public function addFormProperties($document, $propertiesNames, &$formProperties)
+	{
+		parent::addFormProperties($document, $propertiesNames, $formProperties);
+		if (ModuleService::getInstance()->isInstalled('catalog'))
+		{
+			$this->addEcomFormProperties($document, $propertiesNames, $formProperties);
+		}
+	}
+
+	/**
+	 * @param markergas_persistentdocument_markergas $document
+	 * @param string $actionType
+	 * @param array $formProperties
+	 */
+	protected function addEcomFormProperties($document, $propertiesNames, &$formProperties)
+	{
+		$fieldModels = array();
+		// Productname fields.
+		
+		foreach (catalog_ModuleService::getInstance()->getProductModelsThatMayAppearInCarts() as $modelInstance)
+		{
+			if ($modelInstance instanceof f_persistentdocument_PersistentDocumentModel)
+			{
+				$module = $modelInstance->getModuleName();
+				$document = $modelInstance->getDocumentName();
+				$label = LocaleService::getInstance()->transBO('m.'.$module.'.document.'.$document.'.document-name', array('ucf'));
+				$modelInfo = array('module' => $module, 'document' => $document, 'label' => $label, 'infos' => array());
+				$service = $modelInstance->getDocumentService();
+				$prefix = '';
+				foreach ($service->getPropertyNamesForMarkergas() as $mn => $mnInfo) 
+				{
+					list($module1, $document1) = explode('/', $mn);
+					$l1 = '--- ' . LocaleService::getInstance()->transBO('m.'.$module1.'.document.'.$document1.'.document-name', array('ucf'));
+					$modelInfo['infos'][$l1] = '';
+					foreach ($mnInfo as $l2 => $d2) 
+					{
+						$modelInfo['infos'][$prefix.$l2] = $d2;
+					}
+					$prefix .= ' ';
+				}
+				$fieldModels[$module . '/' . $document] = $modelInfo;
+			}
+		}
+		$formProperties['ecomproduct'] = $fieldModels;
+		
+		
+		$category = array();
+		$prefixlabel = LocaleService::getInstance()->transBO('m.markergas.bo.general.shelf-level', array('ucf'));
+		
+		$treeService = TreeService::getInstance();
+		$shelfService = catalog_ShelfService::getInstance();
+		$max = 1;
+		foreach (catalog_TopshelfService::getInstance()->createQuery()->find() as $topShelf)
+		{
+			$descendants = $shelfService->createQuery()->add(Restrictions::descendentOf($topShelf->getId()))->find();
+			foreach ($descendants as $descendant)
+			{
+				$node = $treeService->getInstanceByDocument($descendant);
+				$max = max(($node->getLevel()), $max);
+			}
+		}				
+		
+		for ($i = 1; $i <= $max; $i++)
+		{
+			$category[$prefixlabel . ' -' . $i] = '{'.$i.'}';
+		}		
+		$formProperties['ecomcategory'] = $category;
+	}
 
 	/**
 	 * @return Array
@@ -88,6 +162,7 @@ class markergas_MarkergasService extends website_MarkerService
 	}
 
 	/**
+	 * @deprecated
 	 * @param order_persistentdocument_order $order
 	 * @param markergas_persistentdocument_markergas $marker
 	 * @param Boolean $includeTaxes
@@ -95,17 +170,35 @@ class markergas_MarkergasService extends website_MarkerService
 	 */
 	public function getEcommercePlainMarker($order, $marker, $includeTaxes = true)
 	{
-		$template = TemplateLoader::getInstance()
-			->setMimeContentType(K::HTML)
+		$template = TemplateLoader::getInstance()->setMimeContentType(K::HTML)
 			->setPackageName('modules_markergas')
 			->load('Markergas-ecommercetracker-Inc');
+		$template->setAttribute('order', $order);
+		$template->setAttribute('marker', $marker);
+		$template->setAttribute('includeTaxes', $includeTaxes);
+		$template->setAttribute('products', $this->getProducts($order, $marker, $includeTaxes));
+		$html = $template->execute();
+		return $html;
+	}
+	
+	/**
+	 * @param order_persistentdocument_order $order
+	 * @param markergas_persistentdocument_markergas $marker
+	 * @param Boolean $includeTaxes
+	 * @return String
+	 */	
+	public function getEcommercePlainHeadMarker($order, $marker, $includeTaxes = true)
+	{
+		$template = TemplateLoader::getInstance()->setMimeContentType(K::HTML)
+			->setPackageName('modules_markergas')
+			->load('Markergas-ecommercetracker-IncHead');
 		$template->setAttribute('order', $order);
 		$template->setAttribute('includeTaxes', $includeTaxes);
 		$template->setAttribute('products', $this->getProducts($order, $marker, $includeTaxes));
 		$html = $template->execute();
 		return $html;
 	}
-
+	
 	/**
 	 * @param order_persistentdocument_order $order
 	 * @param markergas_persistentdocument_markergas $marker
@@ -134,37 +227,42 @@ class markergas_MarkergasService extends website_MarkerService
 	private function getProductName($line, $marker)
 	{
 		$product = DocumentHelper::getDocumentInstance($line->getProductId());
-		
 		list(, $model) = explode('_', $product->getDocumentModelName());
-		$productNameMask = $marker->getProductname();
-		$productNameMask = $productNameMask[$model];
-		
-		$productFields = array();
-		preg_match_all('/\{([a-zA-Z0-9]+(\/[a-zA-Z0-9]+)*)\}/', $productNameMask, $productFields);
-
-		$replacements = array();
-		foreach ($productFields[1] as $f)
+		$productNameMaskArray = $marker->getProductnameAsArray();
+		if (isset($productNameMaskArray[$model]))
 		{
-			$path = explode('/', $f);
-			$value = $product;
-			foreach ($path as $property)
+			$productNameMask = $productNameMaskArray[$model];
+			$productFields = array();
+			if (preg_match_all('/\{([a-zA-Z0-9]+(\/[a-zA-Z0-9]+)*)\}/', $productNameMask, $productFields))
 			{
-				$getter = 'get'.ucfirst($property);
-				if (f_util_ClassUtils::methodExists($value, $getter))
+				$replacements = array();
+				foreach ($productFields[1] as $f)
 				{
-					$value = f_util_ClassUtils::callMethodOn($value, $getter);
+					$path = explode('/', $f);
+					$value = $product;
+					foreach ($path as $property)
+					{
+						$getter = 'get'.ucfirst($property);
+						if (f_util_ClassUtils::methodExists($value, $getter))
+						{
+							$value = f_util_ClassUtils::callMethodOn($value, $getter);
+						}
+						else
+						{
+							$value = '';
+							break;
+						}
+					}				
+					$replacements['{'.$f.'}'] = f_util_HtmlUtils::textToHtml(strval($value));
 				}
-				else
-				{
-					$value = '';
-					break;
-				}
+				$productNameMask = str_replace(array_keys($replacements), array_values($replacements), $productNameMask);	
 			}
-			$replacements['{'.$f.'}'] = $value;
+		}
+		else
+		{
+			$productNameMask = '';
 		}
 		
-		$productNameMask = str_replace(array_keys($replacements), array_values($replacements), $productNameMask);
-
 		return $productNameMask;
 	}
 
@@ -176,28 +274,35 @@ class markergas_MarkergasService extends website_MarkerService
 	private function getCategory($line, $order, $marker)
 	{
 		$categoryMask = $marker->getCategory();
-		$product = DocumentHelper::getDocumentInstance($line->getProductId());
-
-		$askedShelves = array();
-		preg_match_all(':{([0-9]+)}:', $categoryMask, $askedShelves);
-		$website = $order->getWebsite();
-		$shelf = $product->getPrimaryShelf($website);
-		$shelfLabels = catalog_ShelfService::getInstance()->createQuery()->add(Restrictions::ancestorOf($shelf->getId()))->setProjection(Projections::property('label'))->findColumn('label');
-		array_unshift($shelfLabels, $shelf->getLabel());
-		
-		$replace = array();
-		foreach ($askedShelves[1] as $level)
+		if ($categoryMask !== null)
 		{
-			$case = count($shelfLabels)-$level;
-			if (isset($shelfLabels[$case]))
+			$product = DocumentHelper::getDocumentInstance($line->getProductId());
+			$askedShelves = array();
+			if (preg_match_all(':{([0-9]+)}:', $categoryMask, $askedShelves))
 			{
-				$replace['{'.$level.'}'] = $shelfLabels[$case];
+				$website = $order->getWebsite();
+				$shelf = $product->getPrimaryShelf($website);
+				$shelfLabels = catalog_ShelfService::getInstance()->createQuery()
+					->add(Restrictions::ancestorOf($shelf->getId()))
+					->setProjection(Projections::property('label'))
+					->findColumn('label');
+				array_unshift($shelfLabels, $shelf->getLabel());
+				
+				$replace = array();
+				foreach ($askedShelves[1] as $level)
+				{
+					$case = count($shelfLabels)-$level;
+					if (isset($shelfLabels[$case]))
+					{
+						$replace['{'.$level.'}'] =  f_util_HtmlUtils::textToHtml(strval($shelfLabels[$case]));
+					}
+				}
+		
+				$categoryMask = str_replace(array_keys($replace), array_values($replace), $categoryMask);
+				$categoryMask = preg_replace(':{[0-9]+}:', '', $categoryMask);
 			}
+			return $categoryMask;
 		}
-
-		$categoryMask = str_replace(array_keys($replace), array_values($replace), $categoryMask);
-		$categoryMask = preg_replace(':{[0-9]+}:', '', $categoryMask);
-
-		return $categoryMask;
+		return '';
 	}
 }

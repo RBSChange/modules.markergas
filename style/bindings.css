@@ -1,4 +1,4 @@
-#edt_website_marker cfield[fieldtype="markergasproperties"]
+#markergas_markergas_productnameAsJSON
 {
-	-moz-binding: url(binding:modules.markergas.cMarkergasEditor#cMarkergasPropertiesField);
+	-moz-binding: url(binding:modules.markergas.cMarkergasEditor#cProductField);
 }

@@ -1,263 +1,186 @@
 <?xml version="1.0"?>
-<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<binding id="cMarkergasPropertiesField" extends="form.cField#cAbstractField">
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<binding id="cProductField" extends="form.cField#cAbstractField">
 		<implementation>
-			<field name="productnameFieldModels">[{PRODUCTNAME_FIELDS_MODELS}]</field>
-		
+			<field name="mValue">null</field>
+			<field name="mProductFields">null</field>
+			
 			<constructor><![CDATA[
-				this.setInitialValue(this.initialvalue);
-		
-				// Check payment module existence.
-				var controller = document.getElementById("wcontroller");
-    			if (controller.checkModuleVersion('payment', '3.0.0'))
-				{
-					var _this = this;
-					var node = this.getElementByAnonId('mUseEcommerce');
-					node.addEventListener('command', function () { _this.handleEcommerceFields(this); }, true);
-				}
-				else
-				{
-					this.getElementByAnonId('mUseEcommerceRow').setAttribute('collapsed', 'true');					
-				}
+				wCore.debug('cProductField.constructor');
+				this.setAttribute("valid", "true");
 			]]></constructor>
-			
-			<method name="handleEcommerceFields">
-				<parameter name="node" />
-				<body><![CDATA[
-					var module, document;
-					if (node.value == 'true')
-					{
-						this.getElementByAnonId('mBillingmodesRow').removeAttribute('collapsed');
-						for (var i in this.productnameFieldModels)
-						{
-							module = this.productnameFieldModels[i].module;
-							document = this.productnameFieldModels[i].document;
-							this.getElementByAnonId('mProductnameRow_'+module+'_'+document).removeAttribute('collapsed');
-						}
-						this.getElementByAnonId('mCategoryRow').removeAttribute('collapsed');
-					}
-					else
-					{
-						this.getElementByAnonId('mBillingmodesRow').setAttribute('collapsed', 'true');
-						for (var i in this.productnameFieldModels)
-						{
-							module = this.productnameFieldModels[i].module;
-							document = this.productnameFieldModels[i].document;
-							this.getElementByAnonId('mProductnameRow_'+module+'_'+document).setAttribute('collapsed', 'true');
-						}
-						this.getElementByAnonId('mCategoryRow').setAttribute('collapsed', 'true');
-					}
-				]]></body>
-			</method>
-		
+					
 			<method name="setInitialValue">
-				<parameter name="val" />
-				<body><![CDATA[
-					this.setValue(val);
-					this.setAttribute("initialvalue", wCore.stringifyJSON(this.mValue));
-					this.onLoad(true);
-				]]></body>
-			</method>
-			
-			<property name="value">
-				<getter><![CDATA[
-					if (this.mValue != null)
-					{
-						return wCore.stringifyJSON(this.mValue);
-					}
-					return '';
-				]]></getter>
-				<setter><![CDATA[
-					this.setValue(val);
-					this.onLoad(false);
-				]]></setter>
-			</property>
-			
-			<method name="setValue">
 				<parameter name="val" />
 				<body><![CDATA[
 					var fval = this.fixString(val);
 					if (fval != '')
 					{
 						this.mValue = wCore.parseJSON(fval);
+						this.setAttribute("initialvalue", wCore.stringifyJSON(this.mValue));
 					}
 					else
 					{
-						this.mValue = {};
+						this.mValue = null;
+						this.setAttribute("initialvalue", '');
 					}
-					if (!'productname' in this.mValue || this.mValue.productname === null)
-					{
-						this.mValue.productname = {};
-					}
-				]]></body>
-			</method>
-			
-			<method name="onLoad">
-				<parameter name="isInitialValue" />
-				<body><![CDATA[
-					this.loadFieldValue('mLogin', 'login', isInitialValue);
-					this.loadFieldValue('mPassword', 'password', isInitialValue);
-					this.loadFieldValue('mGaSiteId', 'gaSiteId', isInitialValue);
-					var useEcommerce = ('useEcommerce' in this.mValue) ? this.mValue['useEcommerce'] : false;
-					this.doLoadFieldValue('mUseEcommerce', useEcommerce, isInitialValue);
-					this.handleEcommerceFields(this.getElementByAnonId('mUseEcommerce'));
-					this.loadFieldValue('mBillingmodes', 'billingmodes', isInitialValue);
 					
-					var module, document, value;
-					for (var i in this.productnameFieldModels)
+					if (this.modified)
 					{
-						module = this.productnameFieldModels[i].module;
-						document = this.productnameFieldModels[i].document;
-						if ('productname' in this.mValue)
-						{
-							value = (module+'/'+document in this.mValue['productname']) ? this.mValue['productname'][module+'/'+document] : '';
-						}
-						else
-						{
-							value = null;
-						}
-						this.doLoadFieldValue('mProductname_'+module+'_'+document, value, isInitialValue);
+						this.removeAttribute("modified");
+						this.dispatchFieldEvent('fieldRestored');						
 					}
-					this.loadFieldValue('mCategory', 'category', isInitialValue);
+					var errorMessage = this.checkRequired(fval);
+					this.setValidity(errorMessage);
+					this.setInitialValueInternals();
 				]]></body>
 			</method>
-			
-			<method name="loadFieldValue">
-				<parameter name="name" />
-				<parameter name="key" />
-				<parameter name="isInitialValue" />
+		
+			<method name="setInitialValueInternals">
 				<body><![CDATA[
-					var value = (key in this.mValue) ? this.mValue[key] : null;
-					this.doLoadFieldValue(name, value, isInitialValue);
-				]]></body>
-			</method>
-			
-			<method name="doLoadFieldValue">
-				<parameter name="name" />
-				<parameter name="value" />
-				<parameter name="isInitialValue" />
-				<body><![CDATA[
-					var node = this.getElementByAnonId(name);
-					if ('setInitialValue' in node)
+					var ini = this.initialvalue;
+					var values = (ini != '') ? wCore.parseJSON(ini) : {};
+					if (this.mProductFields != null)
 					{
-						if (isInitialValue)
+						var ordonedIni = {};
+						for (var modelName in this.mProductFields)
 						{
-							node.setInitialValue(value);
+							if (modelName in values)
+							{
+								this.mProductFields[modelName].setInitialValue(values[modelName]);
+								ordonedIni[modelName] = values[modelName];
+							}
+							else
+							{
+								this.mProductFields[modelName].setInitialValue('');
+							}
+						}
+						ini = wCore.stringifyJSON(ordonedIni);
+						this.setAttribute("initialvalue", (ini == '{}') ? '' : ini);
+					}
+				]]></body>
+			</method>
+				
+			<property name="value">
+				<getter><![CDATA[
+					if (this.mProductFields != null)
+					{
+						var values = {};
+						for (var modelName in this.mProductFields)
+						{
+							var pval = this.mProductFields[modelName].value;
+							if (pval != '') {values[modelName] = pval;}
+						}
+						values = wCore.stringifyJSON(values);
+						return (values == '{}') ? '' : values;
+					}
+					return '';
+				]]></getter>
+				<setter><![CDATA[
+					if (this.mProductFields == null) {return;}
+					var fval = this.fixString(val);
+					var values = (fval != '') ? wCore.parseJSON(fval) : {};
+					for (var modelName in this.mProductFields)
+					{
+						if (modelName in values)
+						{
+							this.mProductFields[modelName].value = values[modelName];
 						}
 						else
 						{
-							node.value = value;
+							this.mProductFields[modelName].value = '';
 						}
+					}
+					this.dispatchValueChanged(fval);
+				]]></setter>
+			</property>
+							
+			<method name="checkValidity">
+				<parameter name="val" />
+				<body><![CDATA[
+					return null;
+				]]></body>
+			</method>
+			
+			<method name="checkIsModified">
+				<body><![CDATA[
+					return this.initialvalue != this.value;
+				]]></body>
+			</method>
+			
+			<method name="setProductInfos">
+				<parameter name="data" />
+				<body><![CDATA[
+					var ini = this.initialvalue;
+					if (ini != '')
+					{
+						ini = wCore.parseJSON(ini);
 					}
 					else
 					{
-						if (isInitialValue)
-						{
-							node.setAttribute('initialvalue', value);
-						}
-						else
-						{
-							wCore.debug('cMarkergasPropertiesField.doLoadFieldValue field not loaded!');
-						}
+						ini = {};
 					}
-				]]></body>
-			</method>
-			
-			<method name="flushFieldValue">
-				<parameter name="field" />
-				<body><![CDATA[
-					var name = field.getAttribute('name');
-					var value = field.value;
-					//wCore.debug("flushFieldValue('"+name+"("+field.tagName+")', '"+value+"')");
-					wCore.debug('this.value = '+this.value);
-					switch (name)
+					this.mProductFields = {};
+					for (var modelName in data)
 					{
-						case 'mLogin':
-							this.mValue.login = value;
-							break;
-						case 'mPassword':
-							this.mValue.password = value;
-							break;
-						case 'mGaSiteId':
-							this.mValue.gaSiteId = value;
-							break;
-						case 'mUseEcommerce':
-							this.mValue.useEcommerce = value;
-							break;
-						case 'mBillingmodes':
-							this.mValue.billingmodes = value;
-							break;
-						case 'mCategory':
-							this.mValue.category = value;
-							break;
-						default:
-							var module, document;
-							for (var i in this.productnameFieldModels)
+						var rowData = data[modelName];
+						var id = 'markergas_markergas_productname_' + rowData.module + '_' + rowData.document;	
+						var cfield = document.getElementById(id);		
+						if (cfield == null)
+						{
+							var row = document.createElement('row');
+							var clabel = document.createElement('clabel');
+							clabel.setAttribute('control', id);
+							clabel.setAttribute('value', "${transui:m.markergas.document.markergas.productname,ucf,js} ("+ rowData.label + ")" );
+							row.appendChild(clabel);
+							cfield = document.createElement('cfield');
+							cfield.setAttribute('id', id);
+							cfield.setAttribute('anonid', modelName);
+							cfield.setAttribute('name', 'productname_' + rowData.module + '_' + rowData.document);
+							cfield.setAttribute('fieldtype', 'longtext');
+							cfield.setAttribute('hidehelp', 'true');
+							cfield.setAttribute('class', 'template');
+							row.appendChild(cfield);
+							this.appendChild(row);
+							
+							for (var subname in rowData.infos)
 							{
-								module = this.productnameFieldModels[i].module;
-								document = this.productnameFieldModels[i].document;
-								if (name == ('mProductname_'+module+'_'+document))
+								if (rowData.infos[subname] != '')
 								{
-									this.mValue.productname[module+'/'+document] = value;
+									cfield.addSubstitution(subname, '{' + rowData.infos[subname] + '}');
+								}
+								else
+								{
+									cfield.addSubstitution(subname, '');
 								}
 							}
-							break;
-					}
-					
-					wCore.debug('this.value = '+this.value);
-					wCore.debug('initial value = '+this.initialvalue);
-					if (this.initialvalue != this.value)
-					{
-						wCore.debug('values are different');
-						if (!this.modified) 
-						{
-							wCore.debug('set as modified');
-							this.setAttribute("modified", "true");
-							this.dispatchFieldEvent('fieldModified');
 						}
+						this.mProductFields[modelName] = cfield;
 					}
-					else
-					{
-						wCore.debug('values are the same');
-						if (this.modified) 
-						{
-							wCore.debug('set as not modified');
-							this.removeAttribute("modified");
-							this.dispatchFieldEvent('fieldRestored');
-						}			
-					}
+
+					this.setInitialValueInternals();
 				]]></body>
 			</method>
 		</implementation>
 		<handlers>
-			<handler event="fieldChanged" phase="capturing"><![CDATA[
-				this.flushFieldValue(event.originalTarget);
-				event.stopPropagation();
+			<handler event="fieldModified"><![CDATA[
+				this.dispatchValueChanged(null);
 			]]></handler>
-		</handlers>	
+			<handler event="fieldRestored"><![CDATA[
+				this.dispatchValueChanged(null);
+			]]></handler>
+		</handlers>
 		<content>
 			<xul:grid flex="1">
 				<xul:columns>
-					<xul:column/>
-					<xul:column flex="1"/>
+					<xul:column />
+					<xul:column flex="1" />
 				</xul:columns>
-				<xul:rows>
-					<xul:row><xul:clabel control="markergas_markergas_login" value="&amp;modules.markergas.document.markergas.Login;" /><xul:cfield anonid="mLogin" id="markergas_markergas_login" name="mLogin" fieldtype="text" hidehelp="true" /></xul:row>
-					<xul:row><xul:clabel control="markergas_markergas_password" value="&amp;modules.markergas.document.markergas.Password;" /><xul:cfield anonid="mPassword" id="markergas_markergas_password" name="mPassword" fieldtype="password" hidehelp="true" /></xul:row>
-					<xul:row><xul:clabel control="markergas_markergas_gaSiteId" value="&amp;modules.markergas.document.markergas.Gasiteid;" /><xul:cfield anonid="mGaSiteId" id="markergas_markergas_gaSiteId" name="mGaSiteId" fieldtype="text" hidehelp="true" /></xul:row>
-					<xul:row anonid="mUseEcommerceRow"><xul:clabel control="markergas_markergas_useEcommerce" value="&amp;modules.markergas.document.markergas.Useecommerce;" /><xul:cfield anonid="mUseEcommerce" id="markergas_markergas_useEcommerce" name="mUseEcommerce" fieldtype="boolean" hidehelp="true" /></xul:row>
-					<xul:row anonid="mBillingmodesRow"><xul:clabel control="markergas_markergas_billingmodes" value="&amp;modules.markergas.document.markergas.Billingmodes;" /><xul:cfield anonid="mBillingmodes" id="markergas_markergas_billingmodes" name="mBillingmodes" fieldtype="documentarray" moduleselector="payment" allow="{PAYMENT_MODELS}" hidehelp="true" /></xul:row>
-					{PRODUCTNAME_FIELDS}
-					<xul:row anonid="mCategoryRow">
-						<xul:clabel control="markergas_markergas_category" value="&amp;modules.markergas.document.markergas.Category;" />
-						<xul:cfield anonid="mCategory" id="markergas_markergas_category" name="mCategory" fieldtype="longtext" hidehelp="true" class="template">
-							{CATEGORY_REPLACEMENT_SUGGESTIONS}
-						</xul:cfield>
-					</xul:row>
+				<xul:rows anonid="rows">
+					<children />
 				</xul:rows>
 			</xul:grid>
-			<children />
 		</content>
 	</binding>
 </bindings>

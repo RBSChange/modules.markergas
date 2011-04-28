@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action name="createMarkergas">
+		<parameter name="listWidget" />
+		<body><![CDATA[this.createDocumentEditor('modules_markergas_markergas', listWidget.getSelectedItems()[0].id);]]></body>
+	</action>
+</actions>

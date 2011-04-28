@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<perspective>
+	<models>
+		<model name="modules_markergas/markergas">
+			<contextactions>
+				<contextaction name="edit"/>
+				<contextaction name="delete"/>
+				<contextaction name="deactivated"/>
+				<contextaction name="reactivate"/>
+			</contextactions>
+		</model>
+	</models>
+	<actions>
+		<action name="createMarkergas" single="true" permission="Insert_markergas" icon="add" 
+			label="&amp;modules.markergas.bo.actions.Createmarkergas;"/>
+	</actions>
+</perspective>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<panel>
+	<section labeli18n="modules.uixul.bo.doceditor.fieldsgroup.Title">
+		<field name="label" />
+		<field name="account" />
+		<field name="langs" type="checklist" />
+	</section>
+	
+	<section labeli18n="modules.website.bo.doceditor.fieldsgroup.Specific-properties">
+		<field name="login" />
+		<field name="password" />
+		<field name="gaSiteId" />
+	</section>
+
+	<section labeli18n="modules.markergas.bo.general.tab.Ecommerce">
+		<field name="useEcommerce" />
+		<field name="billingmodes" />
+		<fieldinput name="productnameAsJSON" />
+		<field name="category" class="template"/>
+	</section>
+	
+	<xul>
+		<javascript>
+			<constructor><![CDATA[
+				this.extendMethod("fireInitializeComplete", this.initializeCompleteMarker);
+			]]></constructor>
+
+			<method name="initializeCompleteMarker">
+				<parameter name="result" />
+				<body><![CDATA[
+					var fields = this.fields;
+					try
+					{
+						fields.langs.replaceItems({websiteId: result.contents.websiteid});
+						
+						var _productnameAsJSON = fields.productnameAsJSON;				
+						if ('setProductInfos' in _productnameAsJSON)
+						{
+							_productnameAsJSON.setProductInfos(result.contents.ecomproduct);
+						}
+						else
+						{
+							_productnameAsJSON.setAttribute('productInfos', wCore.stringifyJSON(result.contents.ecomproduct));
+						}
+						
+						var _category = fields.category;   
+						if ('addSubstitution' in _category)
+						{
+							_category.clearSubstitutions();
+							for (var labsub in result.contents.ecomcategory)
+							{
+								_category.addSubstitution(labsub, result.contents.ecomcategory[labsub]);
+							}
+						}
+					}
+					catch (e)
+					{
+						wCore.error("markergas.properties.initializeCompleteMarker", [], e);
+					}
+				]]></body>
+			</method>
+		</javascript>
+	</xul>
+</panel>

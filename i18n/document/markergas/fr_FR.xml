@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.markergas.document.markergas" lcid="fr_FR">
+  <include id="m.website.document.marker"/>
   <key id="document-name">marqueur Google Analytics</key>
   <key id="edition-form-title">création d'un marqueur Google Analytics</key>
-  <key id="label">label</key>
-  <key id="label-help">label</key>
   <key id="login">adresse e-mail</key>
   <key id="login-help">il s'agit de l'adresse e-mail du compte Google Analytics</key>
   <key id="password">mot de passe</key>
