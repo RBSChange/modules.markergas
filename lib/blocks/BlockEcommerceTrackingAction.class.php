@@ -14,6 +14,7 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 		{
 			return website_BlockView::NONE;
 		}
+		
 		$order = $this->getCurrentOrder();
 		if ($order instanceof order_persistentdocument_order)
 		{

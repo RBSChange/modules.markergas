@@ -10,7 +10,7 @@ class markergas_BlockDashboardGoogleAnalyticsAction extends website_BlockAction
 	 */
 	function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		if ($this->isInBackofficeEdition())
 		{
 			return website_BlockView::DUMMY;
 		}
