@@ -129,33 +129,6 @@ class markergas_GoogleAnalyticsReader
 		$this->client->close();
 	}
 	
-	// Private stuff.
-		
-	private function getPeriod($startDate, $endDate)
-	{
-		if ($startDate === null)
-		{
-			$startDate = new date_DateTime();
-			$startDate->subDays(1);
-		}
-		else
-		{
-			$startDate = new date_DateTime($startDate);
-		}
-		
-		if ($endDate === null)
-		{
-			$endDate = new date_DateTime();
-			$endDate->subMonths(1);
-		}
-		else
-		{
-			$endDate = new date_DateTime($endDate);
-		}
-		
-		return $endDate->format('Ymd') . '-' . $startDate->format('Ymd');
-	}
-	
 	/**
 	 * @return String[]
 	 */
@@ -216,5 +189,31 @@ class markergas_GoogleAnalyticsReader
 			'GoalFunnelReport', 
 			'DashboardReport'
 		);
+	}
+	
+	// Private stuff.
+		
+	private function getPeriod($startDate, $endDate)
+	{
+		if ($startDate === null)
+		{
+			$startDate = date_Calendar::yesterday();
+		}
+		else
+		{
+			$startDate = date_Calendar::getInstance($startDate);
+		}
+		
+		if ($endDate === null)
+		{
+			$endDate = date_Calendar::getInstance();
+			$endDate->sub(date_Calendar::MONTH, 1);
+		}
+		else
+		{
+			$endDate = date_Calendar::getInstance($endDate);
+		}
+		
+		return date_Formatter::format($endDate, 'Ymd') . '-' . date_Formatter::format($startDate, 'Ymd');
 	}
 }
