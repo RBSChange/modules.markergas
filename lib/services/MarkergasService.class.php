@@ -160,26 +160,6 @@ class markergas_MarkergasService extends website_MarkerService
     	}
     	return implode(', ', $websitesLabels);
 	}
-
-	/**
-	 * @deprecated
-	 * @param order_persistentdocument_order $order
-	 * @param markergas_persistentdocument_markergas $marker
-	 * @param Boolean $includeTaxes
-	 * @return String
-	 */
-	public function getEcommercePlainMarker($order, $marker, $includeTaxes = true)
-	{
-		$template = TemplateLoader::getInstance()->setMimeContentType(K::HTML)
-			->setPackageName('modules_markergas')
-			->load('Markergas-ecommercetracker-Inc');
-		$template->setAttribute('order', $order);
-		$template->setAttribute('marker', $marker);
-		$template->setAttribute('includeTaxes', $includeTaxes);
-		$template->setAttribute('products', $this->getProducts($order, $marker, $includeTaxes));
-		$html = $template->execute();
-		return $html;
-	}
 	
 	/**
 	 * @param order_persistentdocument_order $order
