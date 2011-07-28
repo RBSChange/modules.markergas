@@ -256,12 +256,13 @@ class markergas_MarkergasService extends website_MarkerService
 		$categoryMask = $marker->getCategory();
 		if ($categoryMask !== null)
 		{
-			$product = DocumentHelper::getDocumentInstance($line->getProductId());
+			$product = catalog_persistentdocument_product::getInstanceById($line->getProductId());
 			$askedShelves = array();
 			if (preg_match_all(':{([0-9]+)}:', $categoryMask, $askedShelves))
 			{
 				$website = $order->getWebsite();
-				$shelf = $product->getPrimaryShelf($website);
+				$shop = catalog_ShopService::getInstance()->getDefaultByWebsite($website);
+				$shelf = $product->getShopPrimaryShelf($shop);
 				$shelfLabels = catalog_ShelfService::getInstance()->createQuery()
 					->add(Restrictions::ancestorOf($shelf->getId()))
 					->setProjection(Projections::property('label'))
