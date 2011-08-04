@@ -24,8 +24,8 @@ class markergas_DashboardGoogleAnalyticsAction extends dashboard_BaseModuleActio
 	/**
 	 * @see dashboard_BaseModuleAction::getContent()
 	 *
-	 * @param Context $context
-	 * @param Request $request
+	 * @param change_Context $context
+	 * @param change_Request $request
 	 * @return string
 	 */
 	protected function getContent($context, $request)
