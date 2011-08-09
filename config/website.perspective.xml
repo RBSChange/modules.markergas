@@ -12,6 +12,6 @@
 	</models>
 	<actions>
 		<action name="createMarkergas" single="true" permission="Insert_markergas" icon="add" 
-			label="&amp;modules.markergas.bo.actions.Createmarkergas;"/>
+			labeli18n="m.markergas.bo.actions.createmarkergas"/>
 	</actions>
 </perspective>
