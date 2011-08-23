@@ -22,7 +22,7 @@ class markergas_Setup extends object_InitDataSetup
 		{
 			uixul_DocumentEditorService::getInstance()->compileEditorsConfig();
 		}		
-		f_permission_PermissionService::getInstance()->addImportInRight('website', 'markergas', 'websiterights');
+		change_PermissionService::getInstance()->addImportInRight('website', 'markergas', 'websiterights');
 	}
 
 	/**

@@ -13,7 +13,7 @@ class markergas_MarkergasService extends website_MarkerService
 	{
 		if (self::$instance === null)
 		{
-			self::$instance = self::getServiceClassInstance(get_class());
+			self::$instance = new self();
 		}
 		return self::$instance;
 	}
@@ -114,7 +114,7 @@ class markergas_MarkergasService extends website_MarkerService
 	 */
 	public function getAvailableWebsitesForEachMarker()
 	{
-		$permissionService = f_permission_PermissionService::getInstance();
+		$permissionService = change_PermissionService::getInstance();
 		$currentUser = users_BackenduserService::getInstance()->getCurrentBackEndUser();
 		
 		$dataArray = array();
