@@ -1,4 +1,4 @@
-<h2 tal:content="trans:m.markergas.bo.dashboard.dashboard-google-analytics-block-subtitle,ucf,report=widget/reportName,websites=websitesLabel" />
+<h2>${trans:m.markergas.bo.dashboard.dashboard-google-analytics-block-subtitle,ucf,report=widget/reportName,websites=websitesLabel}</h2>
 <table>
 	<thead tal:condition="widget/columns">
 		<tr>
@@ -12,5 +12,5 @@
 	</tbody>
 </table>
 <p class="report-download">
-	<a change:link="module markergas ; action GetGoogleAnalyticsInfo ; report report ; format '0' ; markerId markerId" target="_blank" tal:content="trans:m.markergas.bo.dashboard.pdf-download,ucf" />
+	<a change:link="module markergas ; action GetGoogleAnalyticsInfo ; report report ; format '0' ; markerId markerId" target="_blank">${trans:m.markergas.bo.dashboard.pdf-download,ucf}</a>
 </p>
