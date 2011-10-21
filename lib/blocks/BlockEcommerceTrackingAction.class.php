@@ -22,7 +22,7 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 			$bill = count($bills) == 0 ? null : f_util_ArrayUtils::firstElement($bills);
 			if ($this->getConfiguration()->getTrackonlypaidorders() ? ($bill && $bill->getStatus() !== order_BillService::FAILED) : true)
 			{
-				$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+				$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 				$lang = RequestContext::getInstance()->getLang();
 				$markers = website_MarkerService::getInstance()->getByWebsiteAndLang($website, $lang);
 				foreach ($markers as $marker)

@@ -115,7 +115,7 @@ class markergas_MarkergasService extends website_MarkerService
 	public function getAvailableWebsitesForEachMarker()
 	{
 		$permissionService = change_PermissionService::getInstance();
-		$currentUser = users_BackenduserService::getInstance()->getCurrentBackEndUser();
+		$currentUser = users_UserService::getInstance()->getCurrentBackEndUser();
 		
 		$dataArray = array();
 		foreach ($this->createQuery()->find() as $marker)
