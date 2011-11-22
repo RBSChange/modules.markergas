@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.markergas.bo.blocks.ecommercetracking" lcid="en_GB">
-  <key id="trackonlypaidorders">report</key>
-  <key id="trackonlypaidorders-help">when set to ″no″, all transactions will be tracked by Google Analytics</key>
+  <key id="trackonlypaidorders">follow only unpaid orders</key>
+  <key id="trackonlypaidorders-help">When this option is set to "no", all unpaid transactions will be tracked by Google Analytics.</key>
   <key id="includetaxes">include taxes</key>
-  <key id="includetaxes-help">include taxes in prices</key>
+  <key id="includetaxes-help">Includes taxes in the prices.</key>
 </i18n>
