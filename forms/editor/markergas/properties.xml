@@ -14,7 +14,7 @@
 
 	<section labeli18n="modules.markergas.bo.general.tab.Ecommerce">
 		<field name="useEcommerce" />
-		<field name="billingmodes" />
+		<field name="billingmodes" allow="[modules_payment_connector]" />
 		<fieldinput name="productnameAsJSON" />
 		<field name="category" class="template"/>
 	</section>
