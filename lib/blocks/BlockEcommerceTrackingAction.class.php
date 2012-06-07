@@ -2,13 +2,11 @@
 class markergas_BlockEcommercetrackingAction extends website_BlockAction
 {
 	/**
-	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
 		if ($this->isInBackoffice())
 		{
@@ -27,13 +25,16 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 				$markers = website_MarkerService::getInstance()->getByWebsiteAndLang($website, $lang);
 				foreach ($markers as $marker)
 				{
-					if ($marker instanceof markergas_persistentdocument_markergas && $marker->getUseEcommerce() && in_array(
-							$order->getBillingModeId(), 
-							DocumentHelper::getIdArrayFromDocumentArray(
-									$marker->getBillingmodesArray())))
+					if (!($marker instanceof markergas_persistentdocument_markergas) || !$marker->getUseEcommerce())
 					{
-						$html = markergas_MarkergasService::getInstance()->getEcommercePlainHeadMarker(
-								$order, $marker, $this->getConfiguration()->getIncludetaxes());
+						continue;
+					}
+						
+					$modeIds = DocumentHelper::getIdArrayFromDocumentArray($marker->getBillingmodesArray());
+					if (count($modeIds) < 1 || in_array($order->getBillingModeId(), $modeIds))
+					{
+						$html = $marker->getDocumentService()->getEcommercePlainHeadMarker(
+							$order, $marker, $this->getConfiguration()->getIncludetaxes());
 						$this->getContext()->appendToPlainHeadMarker($html);
 						break;
 					}
@@ -43,6 +44,9 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 		return website_BlockView::NONE;
 	}
 	
+	/**
+	 * @return order_persistentdocument_order
+	 */
 	private function getCurrentOrder()
 	{
 		$orderParams = $this->getHTTPRequest()->getModuleParameters("order");
@@ -64,7 +68,6 @@ class markergas_BlockEcommercetrackingAction extends website_BlockAction
 				{
 					Framework::exception($e);
 				}
-				
 			}
 		}
 		return null;

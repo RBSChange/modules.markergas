@@ -1,32 +1,30 @@
 <script type="text/javascript">
-_gaq.push(['_addTrans',
+	/* <![CDATA[ */
+	_gaq.push(['_addTrans',
 		"${order/getOrderNumber}", // order ID - required
 		"${order/getShop/getLabel}", // affiliation or store name
-<tal:block tal:condition="includeTaxes"> 
-		"${order/getTotalAmountWithTax}", // total - required
-</tal:block>
-<tal:block tal:condition="not: includeTaxes">
-		"${order/getTotalAmountWithoutTax}",// total - required
-</tal:block>
-
+		<tal:block tal:condition="includeTaxes"> 
+			"${order/getTotalAmountWithTax}", // total - required
+		</tal:block>
+		<tal:block tal:condition="not: includeTaxes">
+			"${order/getTotalAmountWithoutTax}",// total - required
+		</tal:block>
 		"${order/getTotalTax}", // tax
 		"${order/getFeesTotalWithTax}", // shipping
 		"${order/getBillingAddress/getCity}", // city
 		"${order/getBillingAddress/getProvince}", // state or province
 		"${order/getBillingAddress/getCountry/getLabel}" // country
-]);
-	
-<tal:block tal:repeat="item products">
-_gaq.push(['_addItem',
-		"${order/getOrderNumber}",	// order ID - required
-		"${item/ref}",	// SKU/code
-		"${item/productName}",	// product name
-		"${item/category}",	// category or variation
-		"${item/price}",	// unit price - required
-		"${item/quantity}" // quantity - required
-]);
-
-</tal:block>
-
-_gaq.push(['_trackTrans']);
+	]);
+	<tal:block tal:repeat="item products">
+		_gaq.push(['_addItem',
+			"${order/getOrderNumber}",	// order ID - required
+			"${item/ref}",	// SKU/code
+			"${item/productName}",	// product name
+			"${item/category}",	// category or variation
+			"${item/price}",	// unit price - required
+			"${item/quantity}" // quantity - required
+		]);
+	</tal:block>
+	_gaq.push(['_trackTrans']);
+	/* ]]> */
 </script>
