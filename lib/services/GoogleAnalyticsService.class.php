@@ -1,30 +1,12 @@
 <?php
 /**
- * markergas_GoogleAnalyticsService
- * @package modules.markergas.lib.services
+ * @package modules.markergas
+ * @method markergas_GoogleAnalyticsService getInstance()
  */
 class markergas_GoogleAnalyticsService extends change_BaseService
 {
 	/**
-	 * Singleton
-	 * @var markergas_GoogleAnalyticsService
-	 */
-	private static $instance = null;
-
-	/**
-	 * @return markergas_GoogleAnalyticsService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
-	/**
-	 * @param String $xmlReport
+	 * @param string $xmlReport
 	 * @return Array
 	 */
 	public function parseXmlReport($xmlReport)

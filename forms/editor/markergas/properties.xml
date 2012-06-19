@@ -5,26 +5,22 @@
 		<field name="account" />
 		<field name="langs" type="checklist" />
 	</section>
-	
 	<section labeli18n="m.website.bo.doceditor.fieldsgroup.specific-properties">
 		<field name="login" />
 		<field name="password" />
 		<field name="gaSiteId" />
 	</section>
-
 	<section labeli18n="m.markergas.bo.general.tab.ecommerce">
 		<field name="useEcommerce" />
 		<field name="billingmodes" />
 		<fieldinput name="productnameAsJSON" />
-		<field name="category" class="template"/>
+		<field name="category" class="template" />
 	</section>
-	
 	<xul>
 		<javascript>
 			<constructor><![CDATA[
 				this.extendMethod("fireInitializeComplete", this.initializeCompleteMarker);
 			]]></constructor>
-
 			<method name="initializeCompleteMarker">
 				<parameter name="result" />
 				<body><![CDATA[
@@ -43,7 +39,7 @@
 							_productnameAsJSON.setAttribute('productInfos', wCore.stringifyJSON(result.contents.ecomproduct));
 						}
 						
-						var _category = fields.category;   
+						var _category = fields.category;	 
 						if ('addSubstitution' in _category)
 						{
 							_category.clearSubstitutions();

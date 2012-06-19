@@ -6,10 +6,10 @@ class markergas_GetGoogleAnalyticsInfoAction extends change_Action
 	 * @param change_Request $request
 	 */
 	public function _execute($context, $request)
-    {
-    	$report = $request->getParameter('report');
-    	$format = $request->getParameter('format', 0);
-   		$markerId = $request->getParameter('markerId');
+	{
+		$report = $request->getParameter('report');
+		$format = $request->getParameter('format', 0);
+		$markerId = $request->getParameter('markerId');
 		try 
 		{
 			$marker = DocumentHelper::getDocumentInstance($markerId);
@@ -20,15 +20,15 @@ class markergas_GetGoogleAnalyticsInfoAction extends change_Action
 			echo f_Locale::translate('&modules.markergas.bo.dashboard.Error-invalid-marker;');
 			exit;
 		}
-    	
-    	$reader = new markergas_GoogleAnalyticsReader($marker->getLogin(), $marker->getPassword(), $marker->getGaSiteId(), 'fr_FR');
+		
+		$reader = new markergas_GoogleAnalyticsReader($marker->getLogin(), $marker->getPassword(), $marker->getGaSiteId(), 'fr_FR');
 		$reader->setHeader($format);
 		echo $reader->query($report, $format);
 		$reader->close();
 		exit;
-    }
-    
-    public function isSecure()
+	}
+	
+	public function isSecure()
 	{
 		return true;
 	}

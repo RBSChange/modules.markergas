@@ -35,10 +35,10 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param String $report
-	 * @param String $startDate
-	 * @param String $endDate
-	 * @return String
+	 * @param string $report
+	 * @param string $startDate
+	 * @param string $endDate
+	 * @return string
 	 */
 	public function queryAsXml($report, $startDate = null, $endDate = null)
 	{ 
@@ -46,10 +46,10 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param String $report
-	 * @param String $startDate
-	 * @param String $endDate
-	 * @return String
+	 * @param string $report
+	 * @param string $startDate
+	 * @param string $endDate
+	 * @return string
 	 */
 	public function queryAsPdf($report, $startDate = null, $endDate = null)
 	{ 
@@ -57,10 +57,10 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param String $report
-	 * @param String $startDate
-	 * @param String $endDate
-	 * @return String
+	 * @param string $report
+	 * @param string $startDate
+	 * @param string $endDate
+	 * @return string
 	 */
 	public function queryAsCsv($report, $startDate = null, $endDate = null)
 	{ 
@@ -68,10 +68,10 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param String $report
-	 * @param String $startDate
-	 * @param String $endDate
-	 * @return String
+	 * @param string $report
+	 * @param string $startDate
+	 * @param string $endDate
+	 * @return string
 	 */
 	public function queryAsTsv($report, $startDate = null, $endDate = null)
 	{ 
@@ -79,11 +79,11 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param String $report
-	 * @param Integer $type
-	 * @param String $startDate
-	 * @param String $endDate
-	 * @return String
+	 * @param string $report
+	 * @param integer $type
+	 * @param string $startDate
+	 * @param string $endDate
+	 * @return string
 	 */
 	public function query($report, $type, $startDate = null, $endDate = null)
 	{ 
@@ -97,7 +97,7 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @param Integer $type
+	 * @param integer $type
 	 */
 	public function setHeader($type)
 	{ 
@@ -130,7 +130,7 @@ class markergas_GoogleAnalyticsReader
 	}
 	
 	/**
-	 * @return String[]
+	 * @return string[]
 	 */
 	public static function getExistingReports()
 	{

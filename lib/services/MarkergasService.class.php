@@ -1,23 +1,10 @@
 <?php
+/**
+ * @package modules.markergas
+ * @method markergas_MarkergasService getInstance()
+ */
 class markergas_MarkergasService extends website_MarkerService
 {
-	/**
-	 * @var markergas_MarkergasService
-	 */
-	private static $instance;
-
-	/**
-	 * @return markergas_MarkergasService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return markergas_persistentdocument_markergas
 	 */
@@ -32,7 +19,7 @@ class markergas_MarkergasService extends website_MarkerService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_markergas/markergas');
+		return $this->getPersistentProvider()->createQuery('modules_markergas/markergas');
 	}
 	
 	/**
@@ -65,14 +52,14 @@ class markergas_MarkergasService extends website_MarkerService
 			{
 				$module = $modelInstance->getModuleName();
 				$document = $modelInstance->getDocumentName();
-				$label = LocaleService::getInstance()->transBO('m.'.$module.'.document.'.$document.'.document-name', array('ucf'));
+				$label = LocaleService::getInstance()->trans('m.'.$module.'.document.'.$document.'.document-name', array('ucf'));
 				$modelInfo = array('module' => $module, 'document' => $document, 'label' => $label, 'infos' => array());
 				$service = $modelInstance->getDocumentService();
 				$prefix = '';
 				foreach ($service->getPropertyNamesForMarkergas() as $mn => $mnInfo) 
 				{
 					list($module1, $document1) = explode('/', $mn);
-					$l1 = '--- ' . LocaleService::getInstance()->transBO('m.'.$module1.'.document.'.$document1.'.document-name', array('ucf'));
+					$l1 = '--- ' . LocaleService::getInstance()->trans('m.'.$module1.'.document.'.$document1.'.document-name', array('ucf'));
 					$modelInfo['infos'][$l1] = '';
 					foreach ($mnInfo as $l2 => $d2) 
 					{
@@ -87,7 +74,7 @@ class markergas_MarkergasService extends website_MarkerService
 		
 		
 		$category = array();
-		$prefixlabel = LocaleService::getInstance()->transBO('m.markergas.bo.general.shelf-level', array('ucf'));
+		$prefixlabel = LocaleService::getInstance()->trans('m.markergas.bo.general.shelf-level', array('ucf'));
 		
 		$treeService = TreeService::getInstance();
 		$shelfService = catalog_ShelfService::getInstance();
@@ -119,16 +106,16 @@ class markergas_MarkergasService extends website_MarkerService
 		
 		$dataArray = array();
 		foreach ($this->createQuery()->find() as $marker)
-	    {
-	    	$website = $marker->getWebsite();
-	    	if ($marker instanceof markergas_persistentdocument_markergas && $permissionService->hasPermission($currentUser, 'modules_website.ViewGAStatistics.website', $website->getId()))
-	    	{
+		{
+			$website = $marker->getWebsite();
+			if ($marker instanceof markergas_persistentdocument_markergas && $permissionService->hasPermission($currentUser, 'modules_website.ViewGAStatistics.website', $website->getId()))
+			{
 				foreach ($marker->getLangsArray() as $lang)
 				{
-	    			$dataArray[$marker->getId()][$website->getLabel()][] = $lang;
+					$dataArray[$marker->getId()][$website->getLabel()][] = $lang;
 				}
-	    	}
-	    }
+			}
+		}
 		return $dataArray;
 	}
 
@@ -154,18 +141,18 @@ class markergas_MarkergasService extends website_MarkerService
 	public function getLabelFromWebsitesAndLangs($websitesAndLangs)
 	{
 		$websitesLabels = array();
-    	foreach ($websitesAndLangs as $label => $langs)
-    	{
-    		$websitesLabels[] = $label . ' (' . implode(', ', $langs) . ')';
-    	}
-    	return implode(', ', $websitesLabels);
+		foreach ($websitesAndLangs as $label => $langs)
+		{
+			$websitesLabels[] = $label . ' (' . implode(', ', $langs) . ')';
+		}
+		return implode(', ', $websitesLabels);
 	}
 	
 	/**
 	 * @param order_persistentdocument_order $order
 	 * @param markergas_persistentdocument_markergas $marker
-	 * @param Boolean $includeTaxes
-	 * @return String
+	 * @param boolean $includeTaxes
+	 * @return string
 	 */	
 	public function getEcommercePlainHeadMarker($order, $marker, $includeTaxes = true)
 	{
