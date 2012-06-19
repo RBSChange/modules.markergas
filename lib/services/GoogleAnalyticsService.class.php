@@ -3,7 +3,7 @@
  * markergas_GoogleAnalyticsService
  * @package modules.markergas.lib.services
  */
-class markergas_GoogleAnalyticsService extends BaseService
+class markergas_GoogleAnalyticsService extends change_BaseService
 {
 	/**
 	 * Singleton
