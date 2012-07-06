@@ -132,7 +132,7 @@
 							var row = document.createElement('row');
 							var clabel = document.createElement('clabel');
 							clabel.setAttribute('control', id);
-							clabel.setAttribute('value', "${transui:m.markergas.document.markergas.productname,ucf,js} ("+ rowData.label + ")" );
+							clabel.setAttribute('value', "${trans:m.markergas.document.markergas.productname,ucf,js} ("+ rowData.label + ")" );
 							row.appendChild(clabel);
 							cfield = document.createElement('cfield');
 							cfield.setAttribute('id', id);

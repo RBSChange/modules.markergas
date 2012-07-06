@@ -89,7 +89,7 @@ class markergas_GoogleAnalyticsReader
 	{ 
 		if (!in_array($report, self::getExistingReports()))
 		{
-			throw new BaseException('Invalid report "'.$report.'" specified!', '&modules.markergas.bo.dashboard.Error-invalid-report;', array('report' => $report));
+			throw new BaseException('Invalid report "'.$report.'" specified!', 'm.markergas.bo.dashboard.error-invalid-report', array('report' => $report));
 		}
 		$period = $this->getPeriod($endDate, $startDate);
 		$url = "https://www.google.com/analytics/reporting/export?fmt={$type}&id={$this->id}&pdr={$period}&cmp=average&rpt={$report}";

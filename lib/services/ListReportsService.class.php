@@ -15,7 +15,7 @@ class markergas_ListReportsService implements list_ListItemsService
 		$itemArray = array();
 		foreach (markergas_GoogleAnalyticsReader::getExistingReports() as $report)
 		{
-			$itemArray[] = new list_Item(f_Locale::translate('&modules.markergas.bo.dashboard.reports.'.$report.';'), $report);
+			$itemArray[] = new list_Item(LocaleService::getInstance()->trans('m.markergas.bo.dashboard.reports.'.$report.'' /* @TODO CHECK */), $report);
 		}
 		return $itemArray;
 	}

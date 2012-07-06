@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.bo.blocks.dashboardgoogleanalytics" lcid="fr_FR">
-  <key id="report">rapport</key>
-  <key id="report-help">rapport Google Analytics que vous souhaitez afficher.</key>
-  <key id="markerid">profil</key>
-  <key id="markerid-help">profil Google Analytics que vous souhaitez afficher.</key>
+	<key id="report">rapport</key>
+	<key id="report-help">rapport Google Analytics que vous souhaitez afficher.</key>
+	<key id="markerid">profil</key>
+	<key id="markerid-help">profil Google Analytics que vous souhaitez afficher.</key>
 </i18n>

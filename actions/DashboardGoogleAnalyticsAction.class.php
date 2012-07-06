@@ -18,7 +18,7 @@ class markergas_DashboardGoogleAnalyticsAction extends dashboard_BaseModuleActio
 	 */
 	protected function getTitle()
 	{
-		return f_Locale::translate('&modules.markergas.bo.dashboard.Report-block;');
+		return LocaleService::getInstance()->trans('m.markergas.bo.dashboard.report-block', array('ucf'));
 	}
 	
 	/**
@@ -42,7 +42,7 @@ class markergas_DashboardGoogleAnalyticsAction extends dashboard_BaseModuleActio
 		catch (Exception $e)
 		{
 			Framework::exception($e);
-			return f_Locale::translate('&modules.markergas.bo.dashboard.Error-invalid-marker;');
+			return LocaleService::getInstance()->trans('m.markergas.bo.dashboard.error-invalid-marker', array('ucf'));
 		}
 		
 		if ($marker->getLogin() && $marker->getPassword() && $marker->getGaSiteId())
@@ -63,12 +63,12 @@ class markergas_DashboardGoogleAnalyticsAction extends dashboard_BaseModuleActio
 			}
 			else
 			{
-				return f_Locale::translate('&modules.markergas.bo.dashboard.Error-getting-data;');
+				return LocaleService::getInstance()->trans('m.markergas.bo.dashboard.error-getting-data', array('ucf'));
 			}
 		}
 		else
 		{
-			return f_Locale::translate('&modules.markergas.bo.dashboard.Error-invalid-marker;');
+			return LocaleService::getInstance()->trans('m.markergas.bo.dashboard.error-invalid-marker', array('ucf'));
 		}
 	}
 }

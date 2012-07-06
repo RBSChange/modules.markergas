@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.document.markergas" lcid="en_GB">
-  <include id="m.website.document.marker"/>
-  <key id="login">email address</key>
-  <key id="login-help">This is the email address for the Google Analytics account.</key>
-  <key id="password">password</key>
-  <key id="password-help">This is the password for the Google Analytics account.</key>
-  <key id="gasiteid">site ID</key>
-  <key id="gasiteid-help">This ID can be found in the URL of the "edit" link that enables defining the parameters of a site profile. For example, in the URL "https://www.google.com/analytics/settings/profile_summary?id=123456", the ID is "123456".</key>
-  <key id="useecommerce">use e-commerce tracking?</key>
-  <key id="useecommerce-help">use e-commerce tracking?</key>
-  <key id="productname">'productName' Google data</key>
-  <key id="productname-help">'productName' Google data</key>
-  <key id="category">Google data 'category'</key>
-  <key id="category-help">Google data 'category'</key>
-  <key id="billingmodes">active only for the following payment methods</key>
-  <key id="billingmodes-help">active only for the following payment methods</key>
-  <key id="account">account ID</key>
-  <key id="account-help">Enter the Google Analytics account ID here.</key>
-  <key id="document-name">Google Analytics tag</key>
-  <key id="edition-form-title">creation of a Google Analytics tag</key>
+	<include id="m.website.document.marker" />
+	<key id="login">email address</key>
+	<key id="login-help">This is the email address for the Google Analytics account.</key>
+	<key id="password">password</key>
+	<key id="password-help">This is the password for the Google Analytics account.</key>
+	<key id="gasiteid">site ID</key>
+	<key id="gasiteid-help">This ID can be found in the URL of the "edit" link that enables defining the parameters of a site profile. For example, in the URL "https://www.google.com/analytics/settings/profile_summary?id=123456", the ID is "123456".</key>
+	<key id="useecommerce">use e-commerce tracking?</key>
+	<key id="useecommerce-help">use e-commerce tracking?</key>
+	<key id="productname">'productName' Google data</key>
+	<key id="productname-help">'productName' Google data</key>
+	<key id="category">Google data 'category'</key>
+	<key id="category-help">Google data 'category'</key>
+	<key id="billingmodes">active only for the following payment methods</key>
+	<key id="billingmodes-help">active only for the following payment methods</key>
+	<key id="account">account ID</key>
+	<key id="account-help">Enter the Google Analytics account ID here.</key>
+	<key id="document-name">Google Analytics tag</key>
+	<key id="edition-form-title">creation of a Google Analytics tag</key>
 </i18n>

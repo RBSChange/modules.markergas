@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.bo.general" lcid="fr_FR">
-  <key id="module-name">marqueur Google analytics</key>
-  <key id="tree-root-name">marqueur Google analytics</key>
-  <key id="system-folder-name">marqueur Google analytics</key>
-  <key id="markertype">Google analytics statistiques</key>
-  <key id="add-new-marker">ajouter un marqueur Google analytics statistiques</key>
-  <key id="product">-- Produit --</key>
-  <key id="article">-- Article --</key>
-  <key id="shelf-level">rayon niveau</key>
+	<key id="module-name">marqueur Google analytics</key>
+	<key id="tree-root-name">marqueur Google analytics</key>
+	<key id="system-folder-name">marqueur Google analytics</key>
+	<key id="markertype">Google analytics statistiques</key>
+	<key id="add-new-marker">ajouter un marqueur Google analytics statistiques</key>
+	<key id="product">-- Produit --</key>
+	<key id="article">-- Article --</key>
+	<key id="shelf-level">rayon niveau</key>
 </i18n>

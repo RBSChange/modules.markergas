@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.bo.dashboard" lcid="en_GB">
-  <key id="report-block">Google Analytics report</key>
-  <key id="pdf-download">download report as a PDF</key>
-  <key id="dashboard-google-analytics-block-subtitle">{report}	for {websites}</key>
-  <key id="error-invalid-marker">The tag is not configured correctly.</key>
-  <key id="error-invalid-report">Report "{report}" is not valid.</key>
-  <key id="error-getting-data">An error occurred while retrieving data from Google Analytics.</key>
+	<key id="report-block">Google Analytics report</key>
+	<key id="pdf-download">download report as a PDF</key>
+	<key id="dashboard-google-analytics-block-subtitle">{report}	for {websites}</key>
+	<key id="error-invalid-marker">The tag is not configured correctly.</key>
+	<key id="error-invalid-report">Report "{report}" is not valid.</key>
+	<key id="error-getting-data">An error occurred while retrieving data from Google Analytics.</key>
 </i18n>

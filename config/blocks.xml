@@ -2,8 +2,8 @@
 <blocks>
 	<block type="modules_markergas_DashboardGoogleAnalytics" icon="statistics" dashboard="true" labeli18n="m.markergas.bo.dashboard.report-block">
 		<parameters>
-			<parameter name="report" type="String" min-occurs="1" default-value="VisitsReport" list-id="modules_markergas/reports" />
-			<parameter name="markerid" type="String" min-occurs="1" list-id="modules_markergas/availablesites" />
+			<parameter name="report" type="String" min-occurs="1" default-value="VisitsReport" from-list="modules_markergas/reports" />
+			<parameter name="markerid" type="String" min-occurs="1" from-list="modules_markergas/availablesites" />
 		</parameters>
 	</block>
 	<block type="modules_markergas_ecommercetracking" icon="markers" labeli18n="m.markergas.bo.general.block.tracking">

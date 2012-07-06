@@ -156,9 +156,7 @@ class markergas_MarkergasService extends website_MarkerService
 	 */	
 	public function getEcommercePlainHeadMarker($order, $marker, $includeTaxes = true)
 	{
-		$template = TemplateLoader::getInstance()->setMimeContentType('html')
-			->setPackageName('modules_markergas')
-			->load('Markergas-ecommercetracker-IncHead');
+		$template = change_TemplateLoader::getNewInstance()->setExtension('html')->load('modules', 'margergas', 'templates', 'Markergas-ecommercetracker-IncHead');
 		$template->setAttribute('order', $order);
 		$template->setAttribute('includeTaxes', $includeTaxes);
 		$template->setAttribute('products', $this->getProducts($order, $marker, $includeTaxes));

@@ -17,7 +17,7 @@ class markergas_GetGoogleAnalyticsInfoAction extends change_Action
 		catch (Exception $e)
 		{
 			Framework::exception($e);
-			echo f_Locale::translate('&modules.markergas.bo.dashboard.Error-invalid-marker;');
+			echo LocaleService::getInstance()->trans('m.markergas.bo.dashboard.error-invalid-marker', array('ucf'));
 			exit;
 		}
 		

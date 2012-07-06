@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.document.markergas" lcid="fr_FR">
-  <include id="m.website.document.marker"/>
-  <key id="document-name">marqueur Google Analytics</key>
-  <key id="edition-form-title">création d'un marqueur Google Analytics</key>
-  <key id="login">adresse e-mail</key>
-  <key id="login-help">il s'agit de l'adresse e-mail du compte Google Analytics</key>
-  <key id="password">mot de passe</key>
-  <key id="password-help">il s'agit du mot de passe du compte Google Analytics</key>
-  <key id="gasiteid">identifiant du site</key>
-  <key id="gasiteid-help">cet identifiant se retrouve dans l'URL du lien ″modifier″ permettant de paramétrer un profil de site. Par exemple, pour l'URL ″https://www.google.com/analytics/settings/profile_summary?id=123456″, l'identifiant du site est ″123456″</key>
-  <key id="useecommerce">utiliser le tracking e-commerce ?</key>
-  <key id="useecommerce-help">utiliser le tracking e-commerce ?</key>
-  <key id="productname">donnée Google 'productName'</key>
-  <key id="productname-help">donnée Google 'productName'</key>
-  <key id="category">donnée Google 'category'</key>
-  <key id="category-help">donnée Google 'category'</key>
-  <key id="billingmodes">uniquement actif pour les modes de paiement</key>
-  <key id="billingmodes-help">uniquement actif pour les modes de paiement</key>
-  <key id="account">identifiant du compte</key>
-  <key id="account-help">saisissez ici l'identifiant du compte Google Analytics</key>
+	<include id="m.website.document.marker" />
+	<key id="document-name">marqueur Google Analytics</key>
+	<key id="edition-form-title">création d'un marqueur Google Analytics</key>
+	<key id="login">adresse e-mail</key>
+	<key id="login-help">il s'agit de l'adresse e-mail du compte Google Analytics</key>
+	<key id="password">mot de passe</key>
+	<key id="password-help">il s'agit du mot de passe du compte Google Analytics</key>
+	<key id="gasiteid">identifiant du site</key>
+	<key id="gasiteid-help">cet identifiant se retrouve dans l'URL du lien ″modifier″ permettant de paramétrer un profil de site. Par exemple, pour l'URL ″https://www.google.com/analytics/settings/profile_summary?id=123456″, l'identifiant du site est ″123456″</key>
+	<key id="useecommerce">utiliser le tracking e-commerce ?</key>
+	<key id="useecommerce-help">utiliser le tracking e-commerce ?</key>
+	<key id="productname">donnée Google 'productName'</key>
+	<key id="productname-help">donnée Google 'productName'</key>
+	<key id="category">donnée Google 'category'</key>
+	<key id="category-help">donnée Google 'category'</key>
+	<key id="billingmodes">uniquement actif pour les modes de paiement</key>
+	<key id="billingmodes-help">uniquement actif pour les modes de paiement</key>
+	<key id="account">identifiant du compte</key>
+	<key id="account-help">saisissez ici l'identifiant du compte Google Analytics</key>
 </i18n>

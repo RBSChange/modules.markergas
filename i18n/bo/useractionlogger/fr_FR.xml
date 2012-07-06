@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.bo.useractionlogger" lcid="fr_FR">
-  <key id="insert-markergas">insert.markergas {documentlabel}</key>
-  <key id="log-insert-markergas">log-insert-markergas</key>
+	<key id="insert-markergas">insert.markergas {documentlabel}</key>
+	<key id="log-insert-markergas">log-insert-markergas</key>
 </i18n>

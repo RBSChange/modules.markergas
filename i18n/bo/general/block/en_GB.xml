@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.markergas.bo.general.block" lcid="en_GB">
-  <key id="tracking">e-commerce tracking</key>
+	<key id="tracking">e-commerce tracking</key>
 </i18n>
