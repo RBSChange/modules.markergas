@@ -37,10 +37,11 @@ class markergas_MarkergasService extends website_MarkerService
 	
 	/**
 	 * @param markergas_persistentdocument_markergas $document
-	 * @param string $actionType
+	 * @param string[] $propertiesNames
 	 * @param array $formProperties
+	 * @param integer $parentId
 	 */
-	public function addFormProperties($document, $propertiesNames, &$formProperties)
+	public function addFormProperties($document, $propertiesNames, &$formProperties, $parentId = null)
 	{
 		parent::addFormProperties($document, $propertiesNames, $formProperties);
 		if (ModuleService::getInstance()->isInstalled('catalog'))
