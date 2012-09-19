@@ -3,16 +3,7 @@ class markergas_Setup extends object_InitDataSetup
 {
 	public function install()
 	{
-		try
-		{
-			$scriptReader = import_ScriptReader::getInstance();
-			$scriptReader->executeModuleScript('markergas', 'init.xml');
-		}
-		catch (Exception $e)
-		{
-			echo "ERROR: " . $e->getMessage() . "\n";
-			Framework::exception($e);
-		}
+		$this->executeModuleScript('init.xml');
 		
 		$mbs = uixul_ModuleBindingService::getInstance();
 		$mbs->addImportInPerspective('website', 'markergas', 'website.perspective');
@@ -26,7 +17,7 @@ class markergas_Setup extends object_InitDataSetup
 	}
 
 	/**
-	 * @return array<string>
+	 * @return string[]
 	 */
 	public function getRequiredPackages()
 	{
