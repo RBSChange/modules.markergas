@@ -1,0 +1,6 @@
+{
+	"name": "rbschange/markergas",
+	"description": "RBS Change Markergas module",
+	"type": "rbschange-compatibility-module",
+	"license":"AGPL-3.0"
+}
