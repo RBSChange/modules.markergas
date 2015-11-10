@@ -287,7 +287,7 @@ class markergas_MarkergasService extends website_MarkerService
 					->add(Restrictions::ancestorOf($shelf->getId()))
 					->setProjection(Projections::property('label'))
 					->findColumn('label');
-				array_unshift($shelfLabels, $shelf->getLabel());
+				array_push($shelfLabels, $shelf->getLabel());
 				
 				$replace = array();
 				foreach ($askedShelves[1] as $level)
